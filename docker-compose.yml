@@ -3,12 +3,12 @@ services:
   db:
     image: mysql:5.6
     environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: ＜パスワードを設定＞
+      MYSQL_USER: user
+      MYSQL_ROOT_PASSWORD: user
       LANG: C.UTF-8
       LANGUAGE: en_US
     ports:
-      - "3316:3306" # ホストからゲストへポートフォワード
+      - "3326:3306" # ホストからゲストへポートフォワード
     volumes:
       - mysql_data:/var/lib/mysql # MysqlDBの永続化
   web:
@@ -16,8 +16,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    environment:
-      ＜環境変数の設定＞
+    # environment:
+    #   ＜環境変数の設定＞
     tty: true
     stdin_open: true
     depends_on:
